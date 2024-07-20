@@ -1,7 +1,8 @@
+import os
 import requests
 
 def get_weather(city):
-    api_key = 'the api key here'
+    api_key = os.getenv('OPENWEATHER_API_KEY')
     url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
     response = requests.get(url)
 
@@ -11,4 +12,9 @@ def get_weather(city):
         return None
     
 weather_data = get_weather('Durban')
-print(weather_data)
+
+if weather_data:
+    weather = weather_data.get('weather')
+    print(weather_data)
+else:
+    print("This is iteration one")
